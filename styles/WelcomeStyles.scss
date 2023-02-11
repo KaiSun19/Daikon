@@ -1,0 +1,13 @@
+.welcome-quote-container{
+    margin: 5%;
+    padding: 2%;
+}
+
+@media (max-width: 395px){
+
+    .welcome-quote-container{
+        padding: 5%;
+        text-align: center;
+    }
+  
+  }
