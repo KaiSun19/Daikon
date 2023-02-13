@@ -29,7 +29,7 @@ export const DaikonProvider = ({children}) =>{
 
     const UIStages = ['InitialQuery','Ideas1','PromptsReading','Ideas2','IdeasRating','Finish']
 
-    const problems = ['new material to replace plastic', 'new material to replace paper', 'recycle any material', 'new way to create biodegradable packaging', 
+    const problems = ["new material to replace plastic", 'new material to replace paper', 'recycle any material', 'new way to create biodegradable packaging', 
     'new material to replace wood', 'new energy to replace non-renewable fuel', 'new social programs running parallel to schools', 'a course to get rich in university', 
     'better base courses for world awareness', 'a course for tangible lifelong concepts', 'more accurate prediction for global energy consumption', 'new ways to harvest energy from unidentified energy sources', 
     'smart ways to redistribute supplies such as energy away from surplus areas', 'low cost global internet connections', 'social media integrated search engines', 
@@ -46,16 +46,15 @@ export const DaikonProvider = ({children}) =>{
                         ' Of course not _all_ animation is useful  If you ve never done animation before don t worry  it s actually pretty straightforward  We ll show you how with a simple 5 step process  Narratives and stories are the most engaging ways to communicate with others  _The first step is to define what exactly you re trying to communicate_  Figure this out  Spend some time absorbing work that _you_ find mesmerizing and special  Note that they vary quite a bit in their implementation but are all fundamentally describing a product  Stripe Connect and really anything on stripe com   district0x   Mac Age of Ultron https   www behance net gallery 28669249 AVENGERS Age of  Ultron UI Reel     This is for me the creative aspect  I will typically start at a high level and start infilling as I continue to sketch  This sits somewhere in between sketching and writing  and when I m in a crunch this can be the only tool I use  At a minimum it will define each  scene  of the animation while also letting me annotate how that scene enters and exits  The early examples I showed in step 2 are made with very different types of technology  Depending on your project s timeline and resources you can leverage each technique as you see fit  These are ordered loosely based on difficulty and time  Open up the timeline window  add each layer to a keyframe  and interpolate between the frames  Save for web  It also helps that they re starting to become a design tool which simplifies the workflow  Jumping on Codepen and forking other s animations or even my own  is a really fast iteration technique  Clients love it  I ve been able to upsell my services at better rates based on something I would have done for fun anyway ', 
                         '   Typography Insight for HoloLens       News Space for HoloLens      A spatial news headline visualizer which fills up your room with the latest news headlines     I wanted to share my design and development story  Books are great but often books on typography get left on the shelves  I started sketching out some ideas about the environment    Windows 10 Fall Creators Update           Unity 2017 2 0p1 MRTP4         Visual Studio 2017 Community           Fall Creators Update SDK         Mixed Reality Toolkit       It could be quite different from what you imagined and designed in the 2D editor  You can see your updates in real time in the headset  You can simply think it as three dimensional background  It makes the user feel safe and grounded  The floor is included in the   MixedRealityCamera prefab   in MRTK  You can easily understand how to use it if you are familiar with After Effects or Flash  Trigger   for Select         Thumbstick   for Teleport and Locomotion       They are pointing specific button and explaining its behavior  The 3D model asset should be exported as glTF 2 0 format    Museum of Type       Typography Insight for HoloLens     Twitter video     All experiments and related opinions are my own    Virtual Reality     Mixed Reality     VR     Typography  Dong Yoon Park https   medium com  dongyoonpark  Go to the profile of Dong Yoon Park  Designer   Creative Technologist  Opinions are my own ']
 
-    const mockIdeas = [
-        'Using a robotics arm that can be self coded for automated expressions of self',
-        'Creating a virtual reality space that can be accessed using Hololens',
-        'Letting people draw their own typographies which can be uploaded online',
-        "Listening to people's stories and finding a language to animate them",
-        "Using a design tool with AI to create a thousand artworks"
-    ]
+
+    const mockIdeas = ['A spaceship that uses new gravity to lift off earth ', 'A new theory for quantum physics that can solve everything', 
+                        'The merge of robotics with biotechnology to create hybrid bio-robots', 'Neuroscientific basis for human to human connections',
+                           'New metallic alloys that can survive extreme conditions']
+
+
     // global states
 
-    const [query, setQuery] = useState('I want to make a...');
+    const [query, setQuery] = useState("I want to make a...");
     const [stage,setStage] = useState(UIStages[0])
     const [firstIdeas,setFirstIdeas] = useState([])
     const [secondIdeas,setSecondIdeas] = useState([])

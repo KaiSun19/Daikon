@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, Card, CardContent, Divider, IconButton, Linea
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
 import { addQuery } from '../../../firebaseHelpers';
-import { BlackTextField } from '../StyledComponents/StyledComponents';
+import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 import { useTheme } from '@mui/material/styles';
 import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material'
 

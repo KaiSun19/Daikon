@@ -1,8 +1,8 @@
 import { Box, Button, Chip, Divider, Stack, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../Context'
-import Navbar from './Navbar'
 import FinishPage from './StageComponents/FinishPage';
+import Navbar from './Navbar'
 import IdeasInput1 from './StageComponents/IdeasInput1';
 import IdeasInput2 from './StageComponents/IdeasInputs2';
 import QueryInput from './StageComponents/QueryInput';

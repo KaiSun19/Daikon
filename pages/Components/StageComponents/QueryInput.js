@@ -2,7 +2,6 @@ import { Box, Button, ButtonGroup, Divider, Stack, Typography } from '@mui/mater
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
 import { addQuery } from '../../../firebaseHelpers';
-import { BlackTextField } from '../StyledComponents/StyledComponents'
 
 function QueryInput() {
 
@@ -52,7 +51,7 @@ function QueryInput() {
     <>
         <center>
             <Typography variant = 'h3' className='page-subtitle'>
-                Let's generate a problem to solve. 
+                Generate a problem to solve. 
             </Typography>
         </center>
         <center>

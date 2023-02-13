@@ -2,7 +2,7 @@ import { Box, Button, ButtonGroup, Divider, Stack, Typography } from '@mui/mater
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
 import { addQuery } from '../../../firebaseHelpers';
-import { BlackTextField } from '../StyledComponents/StyledComponents'
+import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 
 function IdeasInput1() {
 
