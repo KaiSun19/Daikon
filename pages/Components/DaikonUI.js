@@ -12,7 +12,7 @@ import ShowPrompts from './StageComponents/ShowPrompts';
 function DaikonUI() {
 
 
-    const {mobile, UIStages,stage,currentStep} = useDaikonContext();
+    const {mobile, UIStages,stage,currentStep, query} = useDaikonContext();
 
     const stageComponent = () =>{
         switch(stage){
@@ -37,7 +37,7 @@ function DaikonUI() {
         <Navbar />
         <Box sx = {{padding: '2%', display: 'flex', justifyContent : 'center', flexDirection : 'column'}}>
             <center>
-                <Stepper activeStep={currentStep} sx = {{marginBottom : '4%'}}>
+                <Stepper activeStep={currentStep} sx = {{marginBottom : '2%'}}>
                     {UIStages.map((label, index) => {
                     const stepProps = {};
                     const labelProps = {};
@@ -48,6 +48,7 @@ function DaikonUI() {
                     );
                     })}
                 </Stepper>
+                <Typography variant = 'body1' sx = {{margin: '2% 0 2% 0'}}><i>{query}</i></Typography>
             </center>
             <Box className='daikonQuery_container'>
                 {

@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
+import { addNewQuery, createQueryId} from "./firebaseHelpers";
 
 const DaikonContext = React.createContext() // creates a context 
 
@@ -56,13 +57,14 @@ export const DaikonProvider = ({children}) =>{
 
     const [query, setQuery] = useState("I want to make a...");
     const [stage,setStage] = useState(UIStages[0])
-    const [firstIdeas,setFirstIdeas] = useState([])
-    const [secondIdeas,setSecondIdeas] = useState([])
+    const [firstIdeas,setFirstIdeas] = useState([" ", " ", " ", " ", " "])
+    const [secondIdeas,setSecondIdeas] = useState([" ", " ", " ", " ", " "])
     const [ideaRatings, setIdeaRatings] = useState([5,5,5,5,5]);
     const [feedback, setFeedback] = useState()
     const [currentStep, setCurrentStep] = useState(UIStages.indexOf(stage))
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " "])
+    const [currentID, setCurrentID] = useState(" ")
 
 
     const goToPreviousStage = ()=>{
@@ -85,11 +87,14 @@ export const DaikonProvider = ({children}) =>{
         setCurrentStep(UIStages.indexOf(stage))
     },[stage])
 
-    const generateQuery = () =>{
+    const generateQuery = async () =>{
         const problemIndex = Math.floor(Math.random() * problems.length);
         const technologiesIndex = Math.floor(Math.random() * technologies.length);
         const generatedQuery = `I want to make a ${problems[problemIndex]} using ${technologies[technologiesIndex]}`
         setQuery(generatedQuery)
+        const newID = createQueryId(generatedQuery)
+        setCurrentID(newID) 
+        await addNewQuery(generatedQuery)
     }
 
     var axios = require('axios');
@@ -172,6 +177,94 @@ export const DaikonProvider = ({children}) =>{
         }
     },[query])
 
+    // code to check if strings are english and appropiate
+
+    var Filter = require('bad-words');
+    const wordsFilter = new Filter();
+
+    const ValidWords = (sentence) => {
+        let hyphen = 0;
+        let size = sentence.length;
+        if (sentence[0] >= 'A' && sentence[0] <= 'Z' || sentence[0] >= 'a' && sentence[0] <= 'z')
+        {
+            for (let i = 0; i < size; i++)
+            {
+                // Check for numbers
+                if (sentence[i] >= '0' && sentence[i] <= '9')
+                    return false;
+                if (sentence[i] >= 'A' && sentence[i] <= 'Z')
+                    return false;
+ 
+                if (sentence[i] >= 'a' && sentence[i] <= 'z' ||
+                sentence[i] >= 'A' && sentence[i] <= 'Z')
+                    continue;
+ 
+                if (sentence[i] == '-') {
+                    // Only 1 hyphen is allowed
+                    if (++hyphen > 1)
+                        return false;
+ 
+                    // hyphen should be surrounded
+                    // by letters
+                    if (i - 1 < 0
+                        || !(sentence[i - 1] >= 'a' &&
+                        sentence[i - 1] <= 'z' ||
+                        sentence[i - 1] >= 'A' &&
+                        sentence[i - 1] <= 'Z')
+                        || i + 1 >= size
+                        || !(sentence[i + 1] >= 'a' &&
+                        sentence[i + 1] <= 'z' ||
+                        sentence[i + 1] >= 'A' &&
+                        sentence[i + 1] <= 'Z'))
+                        return false;
+                }
+ 
+                // Punctuation must be at the
+                // end of the word
+                else if (i != size - 1
+                    && ((sentence[i] == '!'
+                        || sentence[i] == ','
+                        || sentence[i] == ';'
+                        || sentence[i] == '.'
+                        || sentence[i] == '?'
+                        || sentence[i] == '-'
+                        || sentence[i] == '\''
+                        || sentence[i] == '\"'
+                        || sentence[i]
+                        == ':')))
+                    return false;
+            }
+        }
+        else
+            return true;
+    }
+
+    const checkText = (text)=>{
+        let word = text.split(' ');
+        let isEnglish = true;
+        let isAppropiate = true;
+        for (let indx in word){
+            if(ValidWords(word[indx])){
+                isEnglish = true;
+            }
+            else if(!ValidWords(word[indx])){
+                isEnglish = false;
+            }
+
+        }
+        if(text !== " " && text!== undefined){
+            if(wordsFilter.clean(text).includes('*')){
+                isAppropiate = false;
+            }
+        }
+        if(isEnglish && isAppropiate){
+            return 'OK'
+        }
+        else if(!isEnglish || !isAppropiate){
+            return 'Invalid Text'
+        }
+}
+
 
 
     return(
@@ -202,7 +295,10 @@ export const DaikonProvider = ({children}) =>{
                 setFeedback, 
                 getPrompts, 
                 apiLoading,
-                prompts
+                prompts, 
+                currentID, 
+                setCurrentID,
+                checkText
             }}>
                 {children}
 
