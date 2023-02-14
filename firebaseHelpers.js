@@ -30,7 +30,8 @@ export const addQuery = async (query) =>{
         const docRef = db.collection('Queries').doc(createQueryId(query));
         await docRef.set({
             Query : query, 
-            Ideas : []
+            Ideas1 : [], 
+            Ideas2 : []
           });
     }
     else{

@@ -2,15 +2,12 @@ import { Box, Button, ButtonGroup, Card, CardContent, Divider, IconButton, Linea
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
 import { addQuery } from '../../../firebaseHelpers';
-import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 import { useTheme } from '@mui/material/styles';
 import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material'
 
 function ShowPrompts() {
 
-  const keyword_extractor = require("keyword-extractor");
-
-  const {mockPrompts, goToPreviousStage, goToNextStage, apiLoading, prompts} = useDaikonContext();
+  const {goToPreviousStage, goToNextStage, apiLoading, prompts} = useDaikonContext();
   const theme = useTheme();
 
   const [currentPrompt, setCurrentPrompt] = useState(0)

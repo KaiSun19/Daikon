@@ -62,7 +62,7 @@ export const DaikonProvider = ({children}) =>{
     const [feedback, setFeedback] = useState()
     const [currentStep, setCurrentStep] = useState(UIStages.indexOf(stage))
     const [apiLoading, setApiLoading] = useState(false)
-    const [prompts,setPrompts] = useState([])
+    const [prompts,setPrompts] = useState([" ", " "])
 
 
     const goToPreviousStage = ()=>{
