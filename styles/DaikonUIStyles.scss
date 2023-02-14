@@ -22,13 +22,13 @@ input{
 // loading animation
 
 #loading-spinner {
-    position: absolute;
+    // position: absolute;
     left: 50%;
     top: 50%;
     z-index: 1001;
     width: 80px;
     height: 80px;
-    margin: -40px 0 0 -40px;
+    // margin: -40px 0 0 -40px;
     border-radius: 50%;
     border: 2px solid transparent;
     border-top-color: black;

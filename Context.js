@@ -39,7 +39,7 @@ export const DaikonProvider = ({children}) =>{
     'method to eliminate the possibility of nuclear war', 'way to prevent mass destruction from nuclear war', 'new tool to increase communication governments and communities', 'new way to produce artificial alternatives to biological products such as meat or organs', 
     'new method of fair wealth distribution within a company', 'method to increase insurance contract transparency', 'system to reduce waiting times']
 
-    const technologies = ['Artificial Intelligence', 'Internet of Things', 'Blockchain', 'Nanotechnology', 'Brain-Computer Interfaces', '3D Printing',
+    const technologies = ['Artificial Intelligence', 'Internet of Things', 'Nanotechnology', 'Brain-Computer Interfaces', '3D Printing',
                             'Digital Twins', 'Gene Editing', 'Extended Reality', '5G']
 
     const mockPrompts = [' TLDR  video here  This blog post is a continuation of that series  Everything you look at  every twitch of your arm  every action you take can potentially be recorded  Drawing a circle creates a sphere  while drawing a triangle creates a cube  The network is trained on circles  squares  and triangles  So this was super cool  and it was quite surprising how well it worked  But here s where I ran into the first problem with my  assumptions  Some additional UI thinking was required  What if instead of drawing a tree  I drew a square  However it s easy to imagine how you could run out of primitive shapes quickly  If you have to remember an arbitrary mapping  it s too hard  Above my hand is an icon indicating which object I have currently selected  Switching things up with a very hacky interface  Here you can see drawing and placement as two separate interaction modes  That s a bit out of my reach unfortunately  Perhaps you can t remember the name of something  Or what if you re in a busy office setting and your audio samples become too noisy ', 
@@ -61,6 +61,8 @@ export const DaikonProvider = ({children}) =>{
     const [ideaRatings, setIdeaRatings] = useState([5,5,5,5,5]);
     const [feedback, setFeedback] = useState()
     const [currentStep, setCurrentStep] = useState(UIStages.indexOf(stage))
+    const [apiLoading, setApiLoading] = useState(false)
+    const [prompts,setPrompts] = useState([])
 
 
     const goToPreviousStage = ()=>{
@@ -90,6 +92,87 @@ export const DaikonProvider = ({children}) =>{
         setQuery(generatedQuery)
     }
 
+    var axios = require('axios');
+
+    const startServer = () =>{
+        var data = JSON.stringify({
+            "text": 'Server starting'
+        });
+
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://getsynonyms-m3jn7lm4ka-uc.a.run.app/prompts',
+            mode: 'no-cors',
+            headers: { 
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*"
+            },
+            data : data
+        };
+
+        axios(config)
+            .then(function (response) {
+                    const prompts = Object.values(JSON.parse(JSON.stringify(response.data)))
+                    console.log(prompts);
+                })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    // useEffect(()=>{
+    //     startServer();
+    // },[])
+
+    const getPrompts = () =>{
+        if(query !== "I want to make a..."){
+            setApiLoading(true)
+            console.log(query)
+            var data = JSON.stringify({
+                "text": query
+            });
+    
+            var config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'https://getsynonyms-m3jn7lm4ka-uc.a.run.app/prompts',
+                mode: 'no-cors',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"
+                },
+                data : data
+            };
+    
+            axios(config)
+                .then(function (response) {
+                        const prompts = Object.values(JSON.parse(JSON.stringify(response.data)))
+                        setPrompts(prompts)
+                        console.log(prompts)
+                        setApiLoading(false)
+                    })
+                .catch(function (error) {
+                    setApiLoading(false)
+                    console.log(error);
+                });
+        }
+        else{
+            return ;
+        }
+
+    }
+
+    useEffect(()=>{
+        if(query !== "I want to make a..."){
+            getPrompts();
+        }
+        else{
+            return;
+        }
+    },[query])
+
+
 
     return(
         <DaikonContext.Provider
@@ -116,7 +199,10 @@ export const DaikonProvider = ({children}) =>{
                 mockIdeas, 
                 generateQuery,
                 feedback, 
-                setFeedback
+                setFeedback, 
+                getPrompts, 
+                apiLoading,
+                prompts
             }}>
                 {children}
 

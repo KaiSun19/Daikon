@@ -7,6 +7,7 @@ import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from '../styles/themes';
 
 export default function App({ Component, pageProps }) {
+
   return( 
     <>
       <DaikonProvider>
