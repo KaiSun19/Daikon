@@ -6,7 +6,7 @@ import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 
 function IdeasInput2() {
 
-    const {mobile, goToPreviousStage, secondIdeas,setSecondIdeas, goToNextStage, currentID, firstIdeas} = useDaikonContext();
+    const {mobile, goToPreviousStage, secondIdeas,setSecondIdeas, goToNextStage, currentID, firstIdeas, getRatings, query} = useDaikonContext();
     
     const [ideas1,setIdeas1] = useState(secondIdeas[0]);
     const [ideas2,setIdeas2] = useState(secondIdeas[1]);
@@ -38,8 +38,9 @@ function IdeasInput2() {
 
     const addIdeas = async () =>{
         const ideasList = [ideas1, ideas2, ideas3, ideas4, ideas5];
-      setSecondIdeas(ideasList)
-      await addIdeasDB(currentID, firstIdeas, ideasList)
+        setSecondIdeas(ideasList)
+        getRatings(query,firstIdeas,secondIdeas)
+        await addIdeasDB(currentID, firstIdeas, ideasList)
   }
 
   useEffect(()=>{

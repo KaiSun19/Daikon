@@ -52,7 +52,7 @@ function ShowPrompts() {
             }
 
 
-              <LinearProgress variant="determinate" value = {currentPrompt * 50 + 50} color = 'secondary'/>
+              <LinearProgress variant="determinate" value = {currentPrompt * 20 + 20} color = 'secondary'/>
 
               <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}>
                 <IconButton 
@@ -68,7 +68,7 @@ function ShowPrompts() {
                   aria-label="go-forward"  
                   color="secondary" 
                   sx = {{width : '50%'}} 
-                  disabled = {currentPrompt == 1 ? true : false}
+                  disabled = {currentPrompt == 4 ? true : false}
                   onClick = {handleNextPrompt}
                 >
                   <KeyboardArrowRight sx = {{width : '30px', height: '30px'}}/>
@@ -77,7 +77,7 @@ function ShowPrompts() {
 
               <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}>
                   <Button variant="outlined" color = {'primary'} onClick = {goToPreviousStage} sx = {{width :'50%'}}>Back</Button>
-                  <Button variant="outlined" color = {'primary'} onClick = {goToNextStage} sx = {{width :'50%'}} disabled = {currentPrompt == 1 ? false : true}>Next</Button>
+                  <Button variant="outlined" color = {'primary'} onClick = {goToNextStage} sx = {{width :'50%'}} disabled = {currentPrompt == 4 ? false : true}>Next</Button>
               </ButtonGroup>
             </Box>
         </center>

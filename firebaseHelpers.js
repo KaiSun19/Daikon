@@ -47,3 +47,9 @@ export const addIdeasDB = async (queryID, ideas1,ideas2) =>{
     const res1 = await queryRef.update({"Ideas1.ideas":ideas1});
     const res2 = await queryRef.update({"Ideas2.ideas":ideas2});
 }
+
+export const addRatingsDB = async (queryID, ratingsList) =>{
+    const queryRef = db.collection('Queries').doc(queryID);
+    const res1 = await queryRef.update({"Ideas1.ratings":ratingsList.slice(0,5)});
+    const res2 = await queryRef.update({"Ideas2.ratings":ratingsList.slice(-5)});
+}
