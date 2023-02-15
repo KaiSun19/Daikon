@@ -6,8 +6,8 @@ import Navbar from './Navbar'
 import IdeasInput1 from './StageComponents/IdeasInput1';
 import IdeasInput2 from './StageComponents/IdeasInputs2';
 import QueryInput from './StageComponents/QueryInput';
-import RateIdeas from './StageComponents/RateIdeas';
 import ShowPrompts from './StageComponents/ShowPrompts';
+import ShowRatings from './StageComponents/ShowRatings';
 
 function DaikonUI() {
 
@@ -25,7 +25,7 @@ function DaikonUI() {
             case UIStages[3]:
                 return(<IdeasInput2/>)
             case UIStages[4]:
-                return(<RateIdeas/>)
+                return(<ShowRatings/>)
             case UIStages[5]:
                 return(<FinishPage />)    
         }

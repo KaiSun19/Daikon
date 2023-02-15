@@ -28,7 +28,7 @@ export const DaikonProvider = ({children}) =>{
         {Quote: 'Great things are done by a series of small things brought together.',Author: 'Vincent Van Gogh'},
     ]
 
-    const UIStages = ['InitialQuery','Ideas1','PromptsReading','Ideas2','IdeasRating','Finish']
+    const UIStages = ['InitialQuery','Ideas1','PromptsReading','Ideas2','Results','Finish']
 
     const problems = ["new material to replace plastic", 'new material to replace paper', 'recycle any material', 'new way to create biodegradable packaging', 
     'new material to replace wood', 'new energy to replace non-renewable fuel', 'new social programs running parallel to schools', 'a course to get rich in university', 
@@ -57,6 +57,7 @@ export const DaikonProvider = ({children}) =>{
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
+    const [ratingsList, setRatingsList] = useState([0,0.5,0.25,0.3,0.4,0.7,0.8,0.9,1,1])
 
 
     const goToPreviousStage = ()=>{
@@ -194,6 +195,7 @@ export const DaikonProvider = ({children}) =>{
                 .then(function (response) {
                         const ratings = Object.values(JSON.parse(JSON.stringify(response.data)))
                         addRatingsDB(currentID, ratings[0])
+                        setRatingsList(ratings[0])
                     })
                 .catch(function (error) {
                     setApiLoading(false)
@@ -238,7 +240,8 @@ export const DaikonProvider = ({children}) =>{
                 prompts, 
                 currentID, 
                 setCurrentID,
-                getRatings
+                getRatings,
+                ratingsList
             }}>
                 {children}
 
