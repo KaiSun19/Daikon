@@ -73,3 +73,14 @@ input{
   .MuiStep-root{
     color: #304ffe;
   }
+
+  @for $i from 1 through 5 {
+    #ideasInput-#{$i}{
+        animation-delay: #{ $i + 0.5 /5}s;
+    }
+}
+
+.ideasInput{
+  opacity: 0;
+  animation-fill-mode: forwards;
+}

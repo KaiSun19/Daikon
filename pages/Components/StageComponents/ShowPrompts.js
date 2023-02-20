@@ -24,10 +24,10 @@ function ShowPrompts() {
       <>
         <center>
             <Typography variant = 'h3' className='page-subtitle'>
-                Please read these 2 prompts. 
+                Please read these 5 prompts. 
             </Typography>
             <Typography variant = 'h5' sx = {{marginBottom : '3%'}}>
-                They should be loosely related to your problem. 
+                They should be loosely related to your problem. Try not to focus too much on their meaning fully.  
             </Typography>
         </center>
         <center>

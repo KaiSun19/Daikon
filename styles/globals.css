@@ -115,6 +115,14 @@ a {
   animation: fadeIn-up 3s ease-in-out ; 
 }
 
+.fadeIn-upQuick{
+  animation: fadeIn-up 1s ease-in-out ; 
+}
+
+.fadeIn-upQuick{
+  animation: fadeIn-up 1s ease-in-out ; 
+}
+
 .fadeIn{
   animation: fadeIn 2s ease-in-out forwards; 
   animation-delay: 1s;

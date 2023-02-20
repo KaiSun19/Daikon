@@ -51,12 +51,20 @@ function IdeasInput1() {
     }, [ideas1, ideas2, ideas3, ideas4, ideas5])
 
 
+    useEffect(()=>{
+        const inputs = document.querySelectorAll('.ideasInput');
+        Array.from(inputs).map(input =>{
+            input.classList.add('fadeIn-upQuick');
+        })
+    })
+
+
 
   return (
 <>
         <center>
             <Typography variant = 'h3' className='page-subtitle'>
-                Please give 5 ideas to your problem. Min words is 10.  
+                Please give 5 ideas to your problem. Min words is 10. Ignore how feasible they might be. 
             </Typography>
         </center>
         <center>
@@ -68,26 +76,36 @@ function IdeasInput1() {
                             sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 
                             value = {ideas1}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-1'
+                            className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas2Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas2}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-2'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas3Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas3}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-3'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas4Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas4}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-4'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas5Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas5}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-5'
+                             className='ideasInput'
                         />             
                         </>
                     )
@@ -98,26 +116,36 @@ function IdeasInput1() {
                             sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 
                             value = {ideas1}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-1'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas2Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas2}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-2'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas3Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas3}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-3'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas4Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas4}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-4'
+                             className='ideasInput'
                         />
                         <BlackTextField onChange = {handleIdeas5Change} 
                             sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
                             value = {ideas5}
                             placeholder = 'Anything counts...'
+                            id = 'ideasInput-5'
+                             className='ideasInput'
                         />        
                         </>
 

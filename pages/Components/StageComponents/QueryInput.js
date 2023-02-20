@@ -17,6 +17,15 @@ function QueryInput() {
         }
     },[query])
 
+    useEffect(()=>{
+        const queryText = document.querySelector('#query-box');
+        queryText.classList.add('fadeIn-upQuick');
+        setTimeout(()=>{
+            queryText.classList.remove('fadeIn-upQuick');
+        }, 1000)
+
+    })
+
   return (
     <>
         <center>
@@ -27,7 +36,7 @@ function QueryInput() {
         <center>
             <Box sx = {{width : '75%'}} component = 'form' className=''>
             <Stack direction="row" justifyContent="center" alignItems="center" spacing={1} sx = {{minHeight : '300px'}}>
-                <Typography variant = 'h4'>{query}</Typography>
+                <Typography variant = 'h4' id = 'query-box'>{query}</Typography>
 
             </Stack> 
                 <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}>
