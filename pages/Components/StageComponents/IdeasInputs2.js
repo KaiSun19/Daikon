@@ -39,7 +39,7 @@ function IdeasInput2() {
     const addIdeas = async () =>{
         const ideasList = [ideas1, ideas2, ideas3, ideas4, ideas5];
         setSecondIdeas(ideasList)
-        getRatings(query,firstIdeas,secondIdeas)
+        getRatings(query,firstIdeas,ideasList)
         await addIdeasDB(currentID, firstIdeas, ideasList)
   }
 

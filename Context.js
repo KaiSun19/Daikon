@@ -57,7 +57,7 @@ export const DaikonProvider = ({children}) =>{
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
-    const [ratingsList, setRatingsList] = useState([0,0.5,0.25,0.3,0.4,0.7,0.8,0.9,1,1])
+    const [ratingsList, setRatingsList] = useState([0,0,0,0,0,0,0,0,0,0])
 
 
     const goToPreviousStage = ()=>{
