@@ -1,12 +1,12 @@
 import { Box, Button, ButtonGroup, Divider, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
-import { addIdeasDB} from '../../../firebaseHelpers';
+import { addIdeasDB, addSimilarityDB} from '../../../firebaseHelpers';
 import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 
 function IdeasInput2() {
 
-    const {mobile, goToPreviousStage, secondIdeas,setSecondIdeas, goToNextStage, currentID, firstIdeas, getRatings, query} = useDaikonContext();
+    const {mobile, goToPreviousStage, secondIdeas,setSecondIdeas, goToNextStage, currentID, firstIdeas, getRatings, query, similarity} = useDaikonContext();
     
     const [ideas1,setIdeas1] = useState(secondIdeas[0]);
     const [ideas2,setIdeas2] = useState(secondIdeas[1]);
@@ -41,6 +41,7 @@ function IdeasInput2() {
         setSecondIdeas(ideasList)
         getRatings(query,firstIdeas,ideasList)
         await addIdeasDB(currentID, firstIdeas, ideasList)
+        await addSimilarityDB(currentID,similarity)
   }
 
   useEffect(()=>{

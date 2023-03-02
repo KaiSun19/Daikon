@@ -49,15 +49,16 @@ export const DaikonProvider = ({children}) =>{
 
     const [query, setQuery] = useState("I want to make a...");
     const [stage,setStage] = useState(UIStages[0])
-    const [firstIdeas,setFirstIdeas] = useState([" ", " ", " ", " ", " "])
-    const [secondIdeas,setSecondIdeas] = useState([" ", " ", " ", " ", " "])
+    const [firstIdeas,setFirstIdeas] = useState([])
+    const [secondIdeas,setSecondIdeas] = useState([" ", " ", " "])
     const [ideaRatings, setIdeaRatings] = useState([5,5,5,5,5]);
     const [feedback, setFeedback] = useState()
     const [currentStep, setCurrentStep] = useState(UIStages.indexOf(stage))
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
-    const [ratingsList, setRatingsList] = useState([0,0,0,0,0,0,0,0,0,0])
+    const [ratingsList, setRatingsList] = useState([0,0,0,0,0,0])
+    const [similarity, setSimilarity] = useState(1)
 
 
     const goToPreviousStage = ()=>{
@@ -92,37 +93,6 @@ export const DaikonProvider = ({children}) =>{
 
     var axios = require('axios');
 
-    const startServer = () =>{
-        var data = JSON.stringify({
-            "text": 'Server starting'
-        });
-
-        var config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://getsynonyms-m3jn7lm4ka-uc.a.run.app/prompts',
-            mode: 'no-cors',
-            headers: { 
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*"
-            },
-            data : data
-        };
-
-        axios(config)
-            .then(function (response) {
-                    const prompts = Object.values(JSON.parse(JSON.stringify(response.data)))
-                    console.log(prompts);
-                })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    // useEffect(()=>{
-    //     startServer();
-    // },[])
-
     const getPrompts = () =>{
         if(query !== "I want to make a..."){
             setApiLoading(true)
@@ -145,9 +115,12 @@ export const DaikonProvider = ({children}) =>{
     
             axios(config)
                 .then(function (response) {
-                        const prompts = Object.values(JSON.parse(JSON.stringify(response.data)))
+                        const prompts = Object.values(JSON.parse(JSON.stringify(response.data.prompts[1])))
+                        const avgSimilarity = JSON.parse(JSON.stringify(response.data.prompts[0]))
                         setPrompts(prompts)
+                        setSimilarity(avgSimilarity)
                         console.log(prompts)
+                        console.log(avgSimilarity)
                         setApiLoading(false)
                     })
                 .catch(function (error) {
@@ -241,7 +214,8 @@ export const DaikonProvider = ({children}) =>{
                 currentID, 
                 setCurrentID,
                 getRatings,
-                ratingsList
+                ratingsList,
+                similarity
             }}>
                 {children}
 

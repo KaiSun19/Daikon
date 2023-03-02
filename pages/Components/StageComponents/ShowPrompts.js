@@ -45,7 +45,7 @@ function ShowPrompts() {
                 <Card elevation={3} sx = {{backgroundColor : 'white'}}>
                   <CardContent>
                     <Typography variant = 'body1'>
-                        {prompts[0][currentPrompt]}
+                        {prompts[currentPrompt]}
                     </Typography>
                   </CardContent>
                 </Card>

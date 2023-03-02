@@ -27,6 +27,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "18.2.0",
     "request": "^2.88.2",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "spellchecker": "^3.7.1"
   }
 }
