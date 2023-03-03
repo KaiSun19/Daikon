@@ -9,6 +9,9 @@ export const themeOptions = createTheme({
     secondary: {
       main: '#304ffe',
     },
+    dark : {
+      main : '#212121'
+    },
     background: {
       default: '#ffffff',
       paper: '#f7f7f7',

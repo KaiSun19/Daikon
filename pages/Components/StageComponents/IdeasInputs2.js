@@ -8,47 +8,28 @@ function IdeasInput2() {
 
     const {mobile, goToPreviousStage, secondIdeas,setSecondIdeas, goToNextStage, currentID, firstIdeas, getRatings, query, similarity} = useDaikonContext();
     
-    const [ideas1,setIdeas1] = useState(secondIdeas[0]);
-    const [ideas2,setIdeas2] = useState(secondIdeas[1]);
-    const [ideas3,setIdeas3] = useState(secondIdeas[2]);
-    const [ideas4,setIdeas4] = useState(secondIdeas[3]);
-    const [ideas5,setIdeas5] = useState(secondIdeas[4]);
-    
-    const [ideasOkay, setIdeasOkay] = useState(false)
+    const [ideas1,setIdeas1] = useState(" ");
+    const [ideasCounter, setIdeasCounter] = useState(60)
+
+
+    const addIdeasInput = () =>{
+        setSecondIdeas(ideas =>{
+            return(
+                [...ideas,ideas1]
+            )
+        })
+        setIdeas1(' ')
+    }
+
+    const addIdeas = async () =>{
+        getRatings(query,firstIdeas,secondIdeas)
+        await addIdeasDB(currentID, firstIdeas, secondIdeas)
+        await addSimilarityDB(currentID,similarity)
+    }
 
     const handleIdeas1Change = (e)=>{
         setIdeas1(e.target.value)
     }
-
-    const handleIdeas2Change = (e)=>{
-        setIdeas2(e.target.value)
-    }
-
-    const handleIdeas3Change = (e)=>{
-        setIdeas3(e.target.value)
-    }
-
-    const handleIdeas4Change = (e)=>{
-        setIdeas4(e.target.value)
-    }
-
-    const handleIdeas5Change = (e)=>{
-        setIdeas5(e.target.value)
-    }
-
-    const addIdeas = async () =>{
-        const ideasList = [ideas1, ideas2, ideas3, ideas4, ideas5];
-        setSecondIdeas(ideasList)
-        getRatings(query,firstIdeas,ideasList)
-        await addIdeasDB(currentID, firstIdeas, ideasList)
-        await addSimilarityDB(currentID,similarity)
-  }
-
-  useEffect(()=>{
-    if(ideas1.split(' ').length > 9 && ideas2.split(' ').length > 9  && ideas3.split(' ').length > 9   && ideas4.split(' ').length > 9   && ideas5.split(' ').length > 9 ){
-        setIdeasOkay(true)
-    }
-    }, [ideas1, ideas2, ideas3, ideas4, ideas5])
 
     useEffect(()=>{
         const inputs = document.querySelectorAll('.ideasInput');
@@ -56,6 +37,16 @@ function IdeasInput2() {
             input.classList.add('fadeIn-upQuick');
         })
     })
+
+    useEffect(() => {
+        if(ideasCounter > 0){
+            setTimeout(() => setIdeasCounter(ideasCounter - 1), 1000);
+        }
+        else{
+            addIdeas();
+            goToNextStage();
+        }
+    }, [ideasCounter]);
 
   return (
 <>
@@ -66,94 +57,22 @@ function IdeasInput2() {
             <Typography variant = 'h5'  sx = {{marginBottom : '3%'}}>
                Please give 5 new ideas. 10 words min. 
             </Typography>
+            <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>
         </center>
         <center>
             <Box sx = {{width : '75%'}} component = 'form' className=''>
-                {
-                    mobile ? (
-                        <>
-                        <BlackTextField onChange = {handleIdeas1Change} 
-                            sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 
-                            value = {ideas1}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas2Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas2}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas3Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas3}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas4Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas4}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas5Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas5}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />          
-                        </>
-                    )
-                    :
-                    (
-                        <>
-                        <BlackTextField onChange = {handleIdeas1Change} 
-                            sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 
-                            value = {ideas1}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas2Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas2}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas3Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas3}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas4Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas4}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />
-                        <BlackTextField onChange = {handleIdeas5Change} 
-                            sx = {{width : '100%',margin: '1% 0% 1% 0%'}} 
-                            value = {ideas5}
-                            placeholder = 'Anything counts...'
-                            id = 'ideasInput-1'
-                            className='ideasInput'
-                        />         
-                        </>
-
-                    )
-                }
+                <>
+                    <BlackTextField onChange = {handleIdeas1Change} 
+                        sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 
+                        value = {ideas1}
+                        placeholder = 'Anything counts...'
+                        id = 'ideasInput-1'
+                        className='ideasInput'
+                    />
+                </>
                 <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '1% 0% 1% 0%'}}>
                     <Button variant="outlined" color = {'primary'} onClick = {goToPreviousStage} sx = {{width :'50%'}}>Back</Button>
-                    <Button variant="outlined" color = {'primary'} onClick = {()=>{addIdeas();goToNextStage()}} sx = {{width :'50%'}}  disabled = {ideasOkay ? false : true}>Next</Button>
+                    <Button variant="outlined" color = {'primary'} onClick = {addIdeasInput} sx = {{width :'50%'}}>Add Idea</Button>
                 </ButtonGroup>
             </Box>
         </center>

@@ -1,9 +1,6 @@
 import { Box, Button, ButtonGroup, Card, CardContent, Divider, IconButton, LinearProgress, MobileStepper, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDaikonContext } from '../../../Context'
-import { addQuery } from '../../../firebaseHelpers';
-import { useTheme } from '@mui/material/styles';
-import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material'
 
 
 function ShowRatings() {
@@ -14,18 +11,17 @@ function ShowRatings() {
     return {Index, Score};
   }
   
-  const rows = [
-    createData(0, ratingsList[0]),
-    createData(1, ratingsList[1]),
-    createData(2, ratingsList[2]),
-    createData(3, ratingsList[3]),
-    createData(4, ratingsList[4]),
-    createData(5, ratingsList[5]),
-    createData(6, ratingsList[6]),
-    createData(7, ratingsList[7]),
-    createData(8, ratingsList[8]),
-    createData(9, ratingsList[9]),
-  ];
+  const [rows, setRows] = useState([])
+
+  useEffect(()=>{
+    if(ratingsList.length > 0){
+      let receivedRows = []
+      for(let i = 0; i < ratingsList.length ; i ++){
+        receivedRows.push(createData(i, ratingsList[i]))
+      }
+      setRows(receivedRows)
+    }
+  },[ratingsList])
   
   return (
     <>

@@ -6,12 +6,17 @@ import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 
 function IdeasInput1() {
 
-    const {mobile, goToPreviousStage, goToNextStage, firstIdeas, setFirstIdeas} = useDaikonContext();
+    const {mobile, goToPreviousStage, goToNextStage, firstIdeas, setFirstIdeas}= useDaikonContext();
     
     const [ideas1,setIdeas1] = useState(" ");
+    const [ideasCounter, setIdeasCounter] = useState(60)
 
     const handleIdeas1Change = (e)=>{
         setIdeas1(e.target.value)
+    }
+
+    const addIdeas = () =>{
+        setFirstIdeas(firstIdeas)
     }
 
     // useEffect(()=>{
@@ -19,6 +24,17 @@ function IdeasInput1() {
     //         setIdeasOkay(true)
     //     }
     // }, [ideas1, ideas2, ideas3, ideas4, ideas5])
+
+    useEffect(() => {
+        if(ideasCounter > 0){
+            setTimeout(() => setIdeasCounter(ideasCounter - 1), 1000);
+        }
+        else{
+            addIdeas();
+            goToNextStage();
+            console.log(firstIdeas)
+        }
+    }, [ideasCounter]);
 
 
     useEffect(()=>{
@@ -34,12 +50,8 @@ function IdeasInput1() {
                 [...ideas,ideas1]
             )
         })
+        setIdeas1(' ')
     }
-
-    useEffect(()=>{
-        setIdeas1(" ")
-        console.log(firstIdeas)
-    },[firstIdeas])
 
 
 
@@ -47,8 +59,9 @@ function IdeasInput1() {
 <>
         <center>
             <Typography variant = 'h3' className='page-subtitle'>
-                Please give as many ideas to your problem as possible. Min words is 10. Ignore how feasible they might be. 
+                Please give as many ideas to your problem as possible. Ignore how feasible they might be. 
             </Typography>
+            <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>
         </center>
         <center>
             <Box sx = {{width : '75%'}} component = 'form' className=''>

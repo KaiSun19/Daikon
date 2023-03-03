@@ -12,6 +12,17 @@ function ShowPrompts() {
 
   const [currentPrompt, setCurrentPrompt] = useState(0)
 
+  const [promptsCounter, setPromptsCounter] = useState(100)
+
+  useEffect(() => {
+    if(promptsCounter > 0){
+        setTimeout(() => setPromptsCounter(promptsCounter - 1), 1000);
+    }
+    else{
+        goToNextStage();
+    }
+}, [promptsCounter]);
+
   const handleNextPrompt = ()=>{
     setCurrentPrompt(currentPrompt + 1)
   }
@@ -29,6 +40,7 @@ function ShowPrompts() {
             <Typography variant = 'h5' sx = {{marginBottom : '3%'}}>
                 They should be loosely related to your problem. Try not to focus too much on their meaning fully.  
             </Typography>
+            <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {promptsCounter} seconds left </Typography>
         </center>
         <center>
             <Box sx = {{width : '75%'}} component = 'form' className=''>
@@ -75,10 +87,10 @@ function ShowPrompts() {
                 </IconButton>
               </ButtonGroup>
 
-              <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}>
-                  <Button variant="outlined" color = {'primary'} onClick = {goToPreviousStage} sx = {{width :'50%'}}>Back</Button>
-                  <Button variant="outlined" color = {'primary'} onClick = {goToNextStage} sx = {{width :'50%'}} disabled = {currentPrompt == 4 ? false : true}>Next</Button>
-              </ButtonGroup>
+              {/* <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}> */}
+                  <Button variant="outlined" onClick = {goToPreviousStage} sx = {{width :'100%', backgroundColor: 'dark'}}>Back</Button>
+                  {/* <Button variant="outlined" color = {'primary'} onClick = {goToNextStage} sx = {{width :'50%'}} disabled = {currentPrompt == 4 ? false : true}>Next</Button> */}
+              {/* </ButtonGroup> */}
             </Box>
         </center>
       </>

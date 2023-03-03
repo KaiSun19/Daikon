@@ -35,6 +35,7 @@ export const addNewQuery = async (query) =>{
             Query : query, 
             Ideas1 : {ideas: [], ratings : []}, 
             Ideas2 : {ideas: [], ratings : []},
+            Time : new Date()
           });
     }
     else{
@@ -48,13 +49,15 @@ export const addIdeasDB = async (queryID, ideas1,ideas2) =>{
     const res2 = await queryRef.update({"Ideas2.ideas":ideas2});
 }
 
-export const addRatingsDB = async (queryID, ratingsList) =>{
+export const addRatingsDB = async (queryID, ratingsList, parting) =>{
     const queryRef = db.collection('Queries').doc(queryID);
-    const res1 = await queryRef.update({"Ideas1.ratings":ratingsList.slice(0,5)});
-    const res2 = await queryRef.update({"Ideas2.ratings":ratingsList.slice(-5)});
+    const res1 = await queryRef.update({"Ideas1.ratings":ratingsList.slice(0,parting)});
+    const res2 = await queryRef.update({"Ideas2.ratings":ratingsList.slice(parting)});
 }
 
 export const addSimilarityDB = async (queryID, similarity) =>{
     const queryRef = db.collection('Queries').doc(queryID);
     const res = await queryRef.update({'Similarity':similarity});
 }
+
+// export const getRank = async ()

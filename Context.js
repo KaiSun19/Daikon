@@ -40,7 +40,7 @@ export const DaikonProvider = ({children}) =>{
     'method to eliminate the possibility of nuclear war', 'way to prevent mass destruction from nuclear war', 'new tool to increase communication governments and communities', 'new way to produce artificial alternatives to biological products such as meat or organs', 
     'new method of fair wealth distribution within a company', 'method to increase insurance contract transparency', 'system to reduce waiting times']
 
-    const technologies = ['Artificial Intelligence', 'Internet of Things', 'Nanotechnology', 'Brain-Computer Interfaces', '3D Printing',
+    const technologies = ['Artificial Intelligence', 'Internet of Things', 'Nanotechnology', 'Brain Computer Interfaces', '3D Printing',
                             'Digital Twins', 'Gene Editing', 'Extended Reality', '5G']
 
 
@@ -50,14 +50,14 @@ export const DaikonProvider = ({children}) =>{
     const [query, setQuery] = useState("I want to make a...");
     const [stage,setStage] = useState(UIStages[0])
     const [firstIdeas,setFirstIdeas] = useState([])
-    const [secondIdeas,setSecondIdeas] = useState([" ", " ", " "])
+    const [secondIdeas,setSecondIdeas] = useState([])
     const [ideaRatings, setIdeaRatings] = useState([5,5,5,5,5]);
     const [feedback, setFeedback] = useState()
     const [currentStep, setCurrentStep] = useState(UIStages.indexOf(stage))
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
-    const [ratingsList, setRatingsList] = useState([0,0,0,0,0,0])
+    const [ratingsList, setRatingsList] = useState([])
     const [similarity, setSimilarity] = useState(1)
 
 
@@ -167,7 +167,7 @@ export const DaikonProvider = ({children}) =>{
             axios(config)
                 .then(function (response) {
                         const ratings = Object.values(JSON.parse(JSON.stringify(response.data)))
-                        addRatingsDB(currentID, ratings[0])
+                        addRatingsDB(currentID, ratings[0],firstIdeas.length)
                         setRatingsList(ratings[0])
                     })
                 .catch(function (error) {
