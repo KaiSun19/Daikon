@@ -21,6 +21,16 @@ function IdeasInput2() {
         setIdeas1(' ')
     }
 
+    const enterIdeasInput = (e) =>{
+        e.preventDefault();
+        setSecondIdeas(ideas =>{
+            return(
+                [...ideas,ideas1]
+            )
+        })
+        setIdeas1(' ')
+    }
+
     const addIdeas = async () =>{
         getRatings(query,firstIdeas,secondIdeas)
         await addIdeasDB(currentID, firstIdeas, secondIdeas)
@@ -55,12 +65,12 @@ function IdeasInput2() {
                 Now after reading the prompts. 
             </Typography>
             <Typography variant = 'h5'  sx = {{marginBottom : '3%'}}>
-               Please give 5 new ideas. 10 words min. 
+               Please give some new ideas. Again, do not worry about feasibility. 
             </Typography>
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>
         </center>
         <center>
-            <Box sx = {{width : '75%'}} component = 'form' className=''>
+            <Box sx = {{width : '75%'}} component = 'form' className='' onSubmit = {enterIdeasInput}>
                 <>
                     <BlackTextField onChange = {handleIdeas1Change} 
                         sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 

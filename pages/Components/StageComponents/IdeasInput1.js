@@ -53,6 +53,16 @@ function IdeasInput1() {
         setIdeas1(' ')
     }
 
+    const enterIdeasInput = (e) =>{
+        e.preventDefault();
+        setFirstIdeas(ideas =>{
+            return(
+                [...ideas,ideas1]
+            )
+        })
+        setIdeas1(' ')
+    }
+
 
 
   return (
@@ -64,7 +74,7 @@ function IdeasInput1() {
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>
         </center>
         <center>
-            <Box sx = {{width : '75%'}} component = 'form' className=''>
+            <Box sx = {{width : '75%'}} component = 'form' className='' onSubmit = {enterIdeasInput}>
                 <>
                 <BlackTextField onChange = {handleIdeas1Change} 
                                     sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 

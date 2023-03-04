@@ -6,7 +6,7 @@ import { BlackTextField } from '../../../StyledComponents/StyledComponents';
 
 function FinishPage() {
 
-    const {feedback, setFeedback, setStage, UIStages} = useDaikonContext();
+    const {feedback, setFeedback, setStage, UIStages, setFirstIdeas, setSecondIdeas, setQuery} = useDaikonContext();
 
     const handleFeedbackChange = (e) =>{
         setFeedback(e.target.value)
@@ -14,6 +14,9 @@ function FinishPage() {
 
     const submitFeedback = () =>{
         setStage(UIStages[0])
+        setFirstIdeas([])
+        setSecondIdeas([])
+        setQuery("I want to make a...")
     }
 
   return (
