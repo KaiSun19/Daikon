@@ -7,6 +7,7 @@ import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material'
 
 function ShowPrompts() {
 
+  const basePrompts = [' ', ' ', ' ', ' ', ' ']
   const {goToPreviousStage, goToNextStage, apiLoading, prompts} = useDaikonContext();
   const theme = useTheme();
 
@@ -31,15 +32,23 @@ function ShowPrompts() {
     setCurrentPrompt(currentPrompt - 1)
   }
 
+
   return (
       <>
         <center>
-            <Typography variant = 'h3' className='page-subtitle'>
-                Please read these 5 prompts. 
-            </Typography>
-            <Typography variant = 'h5' sx = {{marginBottom : '3%'}}>
-                They should be loosely related to your problem. Try not to focus too much on their meaning fully.  
-            </Typography>
+          {
+            prompts.toString() !== basePrompts.toString() ? 
+              (
+              <>
+              <Typography variant = 'h3' className='page-subtitle'>Please read these 5 prompts.</Typography>
+                <Typography variant = 'h5' sx = {{marginBottom : '3%'}}>
+                  They should be loosely related to your problem. Try not to focus too much on their meaning fully.  
+                </Typography>
+              </>
+            )
+            :
+              (<Typography variant = 'h3' className='page-subtitle'>Please wait until time is up</Typography>)
+          }
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {promptsCounter} seconds left </Typography>
         </center>
         <center>
@@ -54,13 +63,25 @@ function ShowPrompts() {
                   </div>
                 </Card>
               :
-                <Card elevation={3} sx = {{backgroundColor : 'white'}}>
+                (
+                  prompts.toString() !== basePrompts.toString() ? 
+
+                  <Card elevation={3} sx = {{backgroundColor : 'white'}}>
+                    <CardContent>
+                      <Typography variant = 'body1'>
+                          {prompts[currentPrompt]}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  :
+                  <Card elevation={3} sx = {{backgroundColor : 'white'}}>
                   <CardContent>
                     <Typography variant = 'body1'>
-                        {prompts[currentPrompt]}
+                        No prompts available
                     </Typography>
                   </CardContent>
                 </Card>
+                )
             }
 
 

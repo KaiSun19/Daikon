@@ -10,10 +10,14 @@ function QueryInput() {
     const {mobile,UIStages, query,setQuery,setStage, goToNextStage, generateQuery, getPrompts} = useDaikonContext();
 
     const [queryOkay, setQueryOkay] = useState(false);
+    const [disableQuery, setDisableQuery] = useState(false)
 
     useEffect(()=>{
         if(query.length> 20){
             setQueryOkay(true)
+        }
+        if(query !== "I want to make a..."){
+            setDisableQuery(true)
         }
     },[query])
 
@@ -40,7 +44,7 @@ function QueryInput() {
 
             </Stack> 
                 <ButtonGroup variant="outlined" aria-label="outlined button group" sx = {{width : '100%', margin : '0'}}>
-                    <Button variant="outlined" color = {'primary'} onClick = {()=>{generateQuery();getPrompts()}} sx = {{width :'50%'}}>Generate</Button>
+                    <Button variant="outlined" color = {'primary'} onClick = {()=>{generateQuery();getPrompts()}} sx = {{width :'50%'}} disabled = {disableQuery ? true : false} >Generate</Button>
                     <Button variant="outlined" color = {'primary'} onClick = {goToNextStage} sx = {{width :'50%'}} disabled = {queryOkay ? false : true}  >Next</Button>
                 </ButtonGroup>
             </Box>
