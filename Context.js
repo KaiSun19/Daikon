@@ -59,7 +59,7 @@ export const DaikonProvider = ({children}) =>{
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
-    const [ratingsList, setRatingsList] = useState([])
+    const [ratingsList, setRatingsList] = useState([1,0.5])
     const [similarity, setSimilarity] = useState(1)
 
 

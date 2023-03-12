@@ -8,7 +8,7 @@ import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material'
 function ShowPrompts() {
 
   const basePrompts = [' ', ' ', ' ', ' ', ' ']
-  const {goToPreviousStage, goToNextStage, apiLoading, prompts} = useDaikonContext();
+  const {goToPreviousStage, goToNextStage, apiLoading, prompts, mobile} = useDaikonContext();
   const theme = useTheme();
 
   const [currentPrompt, setCurrentPrompt] = useState(0)
@@ -52,7 +52,7 @@ function ShowPrompts() {
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {promptsCounter} seconds left </Typography>
         </center>
         <center>
-            <Box sx = {{width : '75%'}} component = 'form' className=''>
+            <Box sx = {{width : mobile ? '100%' : '75%'}} component = 'form' className=''>
 
             {
               apiLoading ? 

@@ -38,7 +38,7 @@ function QueryInput() {
             </Typography>
         </center>
         <center>
-            <Box sx = {{width : '75%'}} component = 'form' className=''>
+            <Box sx = {{width : mobile ? '100%' : '75%'}} component = 'form' className=''>
             <Stack direction="row" justifyContent="center" alignItems="center" spacing={1} sx = {{minHeight : '300px'}}>
                 <Typography variant = 'h4' id = 'query-box'>{query}</Typography>
 

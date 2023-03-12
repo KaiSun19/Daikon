@@ -74,7 +74,7 @@ function IdeasInput1() {
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>
         </center>
         <center>
-            <Box sx = {{width : '75%'}} component = 'form' className='' onSubmit = {enterIdeasInput}>
+            <Box sx = {{width : mobile ? '100%' : '75%'}} component = 'form' className='' onSubmit = {enterIdeasInput}>
                 <>
                 <BlackTextField onChange = {handleIdeas1Change} 
                                     sx = {{width : '100%', margin: '1% 0% 1% 0%'}} 

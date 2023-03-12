@@ -72,12 +72,12 @@ function ShowRatings() {
                   </div>
                 </Card>
               :
-              <Stack direction = {mobile ? 'column' : 'row'}>
+              <Stack direction = {mobile ? 'column' : 'row'} spacing = {1} justifyContent="center" className = 'ratings-container'>
 
               {Object.keys(chartData).length > 0 && (
                                 <ScoresBarChart chartData={chartData} />
                 )}
-                
+
                 <TableContainer component={Paper} sx = {{maxWidth : '580px', backgroundColor: 'white', boxShadow: "none", border: '1px solid #bdbdbd'}}>
                   <Table aria-label="ratings table">
                     <TableHead>
