@@ -48,7 +48,7 @@ function DaikonUI() {
                     );
                     })}
                 </Stepper>
-                <Typography variant = 'body1' sx = {{margin: '2% 0 2% 0'}}><i>{query}</i></Typography>
+                <Typography variant = 'h6' sx = {{margin: '2% 0 2% 0'}}><b>{query}</b></Typography>
             </center>
             <Box className='daikonQuery_container'>
                 {

@@ -13,7 +13,7 @@ function ShowPrompts() {
 
   const [currentPrompt, setCurrentPrompt] = useState(0)
 
-  const [promptsCounter, setPromptsCounter] = useState(100)
+  const [promptsCounter, setPromptsCounter] = useState(60)
 
   useEffect(() => {
     if(promptsCounter > 0){

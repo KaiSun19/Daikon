@@ -30,18 +30,20 @@ export const DaikonProvider = ({children}) =>{
 
     const UIStages = ['InitialQuery','Ideas1','PromptsReading','Ideas2','Results','Finish']
 
-    const problems = ["new material to replace plastic", 'new material to replace paper', 'recycle any material', 'new way to create biodegradable packaging', 
-    'new material to replace wood', 'new energy to replace non-renewable fuel', 'new social programs running parallel to schools', 'a course to get rich in university', 
+    const problems = ["new material to replace plastic", 'new material to replace paper', 'way to recycle any material', 'new way to create biodegradable packaging', 
+    'new material to replace wood', 'new energy to replace non-renewable fuel', 'new social programs running parallel to schools', 'course to get rich in university', 
     'better base courses for world awareness', 'a course for tangible lifelong concepts', 'more accurate prediction for global energy consumption', 'new ways to harvest energy from unidentified energy sources', 
     'smart ways to redistribute supplies such as energy away from surplus areas', 'low cost global internet connections', 'social media integrated search engines', 
-    'autonomous smart traffic systems', 'general purpose robots' , 'dynamically changing materials depending on a problem' , 'algorithm for fully secure smart contract development', 'new way to get clean water', 'smart waste water management in rural areas', 
-    'cheaper ways to provide sanitation products' , 'efficient showers and bath tub systems for rural areas', 'water sensitive alternative to products such as water fountains', 'unified insight into any food product in a supermarket', 
-    'eradicate factory farming', 'new scientific evidence for food diets', 'more accurate prediction of global warming in the next decade', 'unbiased data', 'reduce the hysteria of data protection', 'scenario of evacuating the world population from earth', 'method to prevent mass destruction from asteroids', 
-    'method to eliminate the possibility of nuclear war', 'way to prevent mass destruction from nuclear war', 'new tool to increase communication governments and communities', 'new way to produce artificial alternatives to biological products such as meat or organs', 
-    'new method of fair wealth distribution within a company', 'method to increase insurance contract transparency', 'system to reduce waiting times']
+    'autonomous smart traffic system', 'general purpose robot' , 'dynamically changing material depending on a problem' , 'algorithm for fully secure smart contract development', 'new way to get clean water', 'smart waste water management in rural areas', 
+    'cheaper way to provide sanitation products' , 'efficient shower and bath tub system for rural areas', 'water sensitive alternative to products such as water fountains', 'detailed insight into any food product in a supermarket', 
+    'way to eradicate factory farming', 'new scientific breakthrough for food diets', 'more accurate prediction of global warming in the next decade', 'method for unbiased data', 'way to reduce the hysteria of data protection', 'scenario of evacuating the world population from earth', 'method to prevent mass destruction from asteroids', 
+    'method to eliminate the possibility of nuclear war', 'way to prevent mass destruction from nuclear war', 'new tool to increase communication between governments and communities', 'new way to produce artificial alternatives to biological products such as meat or organs', 
+    'new method of fair wealth distribution within a company', 'method to increase insurance contract transparency', 'system to reduce waiting times', 'way to remove hack attacks', 'way for data to be controlled fully by its owner', 'better customer experience system', 'better booking system for transport', 'way to alleviate waiting times in queues',
+    'new concept of creating better cities', 'new way to deal with traffic congestion in busy places','way to remove the possibility of government corruption']
 
     const technologies = ['Artificial Intelligence', 'Internet of Things', 'Nanotechnology', 'Brain Computer Interfaces', '3D Printing',
-                            'Digital Twins', 'Gene Editing', 'Extended Reality', '5G']
+                            'Digital Twins', 'Gene Editing', 'Extended Reality', '5G', 'active structures', 'machine vision', 'quantum computing','AI generated media',
+                        'smart grids', 'graphene', 'robotics']
 
 
 
@@ -88,7 +90,7 @@ export const DaikonProvider = ({children}) =>{
         setQuery(generatedQuery)
         const newID = createQueryId(generatedQuery)
         setCurrentID(newID) 
-        await addNewQuery(generatedQuery)
+        await addNewQuery(newID,generatedQuery)
     }
 
     var axios = require('axios');
@@ -147,6 +149,7 @@ export const DaikonProvider = ({children}) =>{
 
     const getRatings = (query,firstIdeas,secondIdeas) =>{
         if(query && firstIdeas && secondIdeas){
+            setApiLoading(true)
             const ideasList = [query].concat(firstIdeas).concat(secondIdeas)
             var data = JSON.stringify({
                 "data": ideasList
@@ -169,6 +172,7 @@ export const DaikonProvider = ({children}) =>{
                         const ratings = Object.values(JSON.parse(JSON.stringify(response.data)))
                         addRatingsDB(currentID, ratings[0],firstIdeas.length)
                         setRatingsList(ratings[0])
+                        setApiLoading(false)
                     })
                 .catch(function (error) {
                     setApiLoading(false)

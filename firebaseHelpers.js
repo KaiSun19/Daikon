@@ -3,6 +3,8 @@ import { useDaikonContext } from './Context';
 import { db } from './firebase';
 
 
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+const charactersLength = characters.length;
 
 export const checkQueryExists = async (query) => {
     let ids = [];
@@ -24,23 +26,18 @@ export const createQueryId = (query) =>{
     wordsArray.map(word =>{
         id = id + word.slice(0,2);
     })
+    id = id +  characters.charAt(Math.floor(Math.random() * charactersLength));
     return id;
 }
 
-export const addNewQuery = async (query) =>{
-    if(await checkQueryExists(query) == false){
-        const newID = createQueryId(query) 
-        const docRef = db.collection('Queries').doc(newID);
-        await docRef.set({
-            Query : query, 
-            Ideas1 : {ideas: [], ratings : []}, 
-            Ideas2 : {ideas: [], ratings : []},
-            Time : new Date()
-          });
-    }
-    else{
-        return;
-    }
+export const addNewQuery = async (currentID,query) =>{
+    const docRef = db.collection('Queries').doc(currentID); 
+    await docRef.set({
+        Query : query, 
+        Ideas1 : {ideas: [], ratings : []}, 
+        Ideas2 : {ideas: [], ratings : []},
+        Time : new Date()
+      });
 }
 
 export const addIdeasDB = async (queryID, ideas1,ideas2) =>{
