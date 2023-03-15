@@ -68,7 +68,7 @@ function IdeasInput1() {
   return (
 <>
         <center>
-            <Typography variant = 'h3' className='page-subtitle'>
+            <Typography variant = {mobile ? 'h5' : 'h3'} className='page-subtitle'>
                 Please give as many ideas to your problem as possible. Ignore how feasible they might be. 
             </Typography>
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>

@@ -33,7 +33,7 @@ function QueryInput() {
   return (
     <>
         <center>
-            <Typography variant = 'h3' className='page-subtitle'>
+            <Typography variant = {mobile ? 'h5' : 'h3'} className='page-subtitle'>
                 Generate a problem to solve. 
             </Typography>
         </center>

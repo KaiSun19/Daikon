@@ -40,7 +40,7 @@ function ShowPrompts() {
             prompts.toString() !== basePrompts.toString() ? 
               (
               <>
-              <Typography variant = 'h3' className='page-subtitle'>Please read these 5 prompts.</Typography>
+              <Typography variant = {mobile ? 'h5' : 'h3'} className='page-subtitle'>Please read these 5 prompts.</Typography>
                 <Typography variant = 'h5' sx = {{marginBottom : '3%'}}>
                   They should be loosely related to your problem. Try not to focus too much on their meaning fully.  
                 </Typography>

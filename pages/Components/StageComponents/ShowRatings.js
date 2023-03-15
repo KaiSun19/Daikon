@@ -61,13 +61,13 @@ function ShowRatings() {
   return (
     <>
         <center>
-            <Typography variant = 'h3' className='page-subtitle'>
+            <Typography variant = {mobile ? 'h5' : 'h3'} className='page-subtitle'>
                 Here are the results. 
             </Typography>
-            <Typography variant = 'h5'  sx = {{marginBottom : '3%'}}>
+            <Typography variant = {mobile ? 'h5' : 'h3'}  sx = {{marginBottom : '3%'}}>
                1 is more creative 0 is less.
             </Typography>
-            <Typography variant = 'h5'  sx = {{margin : '1%'}}>
+            <Typography variant = {mobile ? 'h5' : 'h3'}  sx = {{margin : '1%'}}>
                You are the <b id = 'ranking-text'>{userRank}th</b> most creative user.
             </Typography>
         </center>

@@ -55,6 +55,9 @@ function Intro() {
         <Typography variant = 'body1' sx = {{margin : '1%'}}>
             <b>5.</b> You will then be asked to repeat step 2. 
         </Typography>
+        <Typography variant = 'subtitle1' sx = {{margin : '1%'}}>
+            <i>Please set your browser to light mode</i>
+        </Typography>
     </center>
     <center>
         <Box sx = {{width : mobile ? '100%' : '75%'}} component = 'form' className=''>
