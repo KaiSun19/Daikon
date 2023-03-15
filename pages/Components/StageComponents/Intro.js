@@ -68,7 +68,7 @@ function Intro() {
                 {
                     formPoints.map((point,index) => {
                         return(
-                            <FormControlLabel control={<Checkbox  />} label={point} onChange = {(e)=>{handleCheck(e,index)}}/>
+                            <FormControlLabel control={<Checkbox  />} key = {`checkbox-${index}`} label={point} onChange = {(e)=>{handleCheck(e,index)}}/>
                         )
                     })
                 }
