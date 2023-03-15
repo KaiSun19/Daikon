@@ -1,6 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { addNewQuery, addRatingsDB, createQueryId} from "./firebaseHelpers";
+import { addNewQuery, addRatingsDB, createQueryId, getRankDB, UTILaverage} from "./firebaseHelpers";
 
 const DaikonContext = React.createContext() // creates a context 
 
@@ -28,7 +28,7 @@ export const DaikonProvider = ({children}) =>{
         {Quote: 'Great things are done by a series of small things brought together.',Author: 'Vincent Van Gogh'},
     ]
 
-    const UIStages = ['InitialQuery','Ideas1','PromptsReading','Ideas2','Results','Finish']
+    const UIStages = ['Intro','InitialQuery','Ideas1','PromptsReading','Ideas2','Results','Finish']
 
     const problems = ["new material to replace plastic", 'new material to replace paper', 'way to recycle any material', 'new way to create biodegradable packaging', 
     'new material to replace wood', 'new energy to replace non-renewable fuel', 'new social programs running parallel to schools', 'course to get rich in university', 
@@ -59,8 +59,9 @@ export const DaikonProvider = ({children}) =>{
     const [apiLoading, setApiLoading] = useState(false)
     const [prompts,setPrompts] = useState([" ", " ", " ", " ", " "])
     const [currentID, setCurrentID] = useState(" ")
-    const [ratingsList, setRatingsList] = useState([1,0.5])
+    const [ratingsList, setRatingsList] = useState([])
     const [similarity, setSimilarity] = useState(1)
+    const [userRank, setUserRank] = useState(0)
 
 
     const goToPreviousStage = ()=>{
@@ -72,7 +73,7 @@ export const DaikonProvider = ({children}) =>{
     }
 
     const goToNextStage = ()=>{
-        if(stage == UIStages[5]){
+        if(stage == UIStages[6]){
             return;
         }
         const stageIndex = UIStages.indexOf(stage)
@@ -91,6 +92,7 @@ export const DaikonProvider = ({children}) =>{
         const newID = createQueryId(generatedQuery)
         setCurrentID(newID) 
         await addNewQuery(newID,generatedQuery)
+
     }
 
     var axios = require('axios');
@@ -172,6 +174,7 @@ export const DaikonProvider = ({children}) =>{
                         const ratings = Object.values(JSON.parse(JSON.stringify(response.data)))
                         addRatingsDB(currentID, ratings[0],firstIdeas.length)
                         setRatingsList(ratings[0])
+                        // setUserRank(getRankDB(UTILaverage(ratings[0])))
                         setApiLoading(false)
                     })
                 .catch(function (error) {
@@ -184,6 +187,16 @@ export const DaikonProvider = ({children}) =>{
         }
 
     }
+
+    useEffect(()=>{
+            async function fetchRank(){
+                if(ratingsList.length > 0 ){
+                    setUserRank(await getRankDB(UTILaverage(ratingsList)))
+                }
+            }
+           fetchRank();
+        }
+    ,[ratingsList])
 
 
 
@@ -219,7 +232,8 @@ export const DaikonProvider = ({children}) =>{
                 setCurrentID,
                 getRatings,
                 ratingsList,
-                similarity
+                similarity,
+                userRank
             }}>
                 {children}
 

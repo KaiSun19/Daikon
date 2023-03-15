@@ -5,6 +5,7 @@ import { db } from './firebase';
 
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const charactersLength = characters.length;
+export const UTILaverage = array => array.reduce((a, b) => a + b) / array.length;
 
 export const checkQueryExists = async (query) => {
     let ids = [];
@@ -15,7 +16,7 @@ export const checkQueryExists = async (query) => {
     if(ids.includes(query)){
         return true;
     }
-    else{
+    else{s
         return false;
     }
 }
@@ -42,19 +43,41 @@ export const addNewQuery = async (currentID,query) =>{
 
 export const addIdeasDB = async (queryID, ideas1,ideas2) =>{
     const queryRef = db.collection('Queries').doc(queryID);
-    const res1 = await queryRef.update({"Ideas1.ideas":ideas1});
-    const res2 = await queryRef.update({"Ideas2.ideas":ideas2});
+    if(queryRef){
+        const res1 = await queryRef.update({"Ideas1.ideas":ideas1});
+        const res2 = await queryRef.update({"Ideas2.ideas":ideas2});
+    }
 }
 
 export const addRatingsDB = async (queryID, ratingsList, parting) =>{
     const queryRef = db.collection('Queries').doc(queryID);
-    const res1 = await queryRef.update({"Ideas1.ratings":ratingsList.slice(0,parting)});
-    const res2 = await queryRef.update({"Ideas2.ratings":ratingsList.slice(parting)});
+    if(queryRef){
+        const res1 = await queryRef.update({"Ideas1.ratings":ratingsList.slice(0,parting)});
+        const res2 = await queryRef.update({"Ideas2.ratings":ratingsList.slice(parting)});
+    }
 }
 
 export const addSimilarityDB = async (queryID, similarity) =>{
     const queryRef = db.collection('Queries').doc(queryID);
-    const res = await queryRef.update({'Similarity':similarity});
+    if(queryRef){
+        const res = await queryRef.update({'Similarity':similarity});
+    }
 }
+
+export const getRankDB = async (currentAvg) => {
+    let queriesScores = [currentAvg]
+    const snapshot = await db.collection('Queries').get();
+    snapshot.docs.map(doc => {
+        const queriesData = doc.data()
+        if(queriesData['Ideas1']['ratings'].length > 0 ){
+            const ideas = queriesData['Ideas1']['ratings'].concat(queriesData['Ideas2']['ratings']);
+            queriesScores.push(UTILaverage(ideas));
+        }
+    })
+    queriesScores = queriesScores.sort(function (a, b) {  return a - b;  })
+    return queriesScores.length - queriesScores.indexOf(currentAvg);
+}
+
+
 
 // export const getRank = async ()

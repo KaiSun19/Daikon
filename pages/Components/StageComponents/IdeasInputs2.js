@@ -61,10 +61,7 @@ function IdeasInput2() {
   return (
 <>
         <center>
-            <Typography variant = 'h3' className='page-subtitle'>
-                Now after reading the prompts. 
-            </Typography>
-            <Typography variant = 'h5'  sx = {{marginBottom : '3%'}}>
+            <Typography variant = 'h3'  sx = {{marginBottom : '3%'}}>
                Please give some new ideas. Again, do not worry about feasibility. 
             </Typography>
             <Typography variant = 'subtitle1' sx = {{margin: '2% 0 2% 0'}} >You have {ideasCounter} seconds left </Typography>

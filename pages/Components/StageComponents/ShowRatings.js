@@ -13,7 +13,7 @@ function ShowRatings() {
   const [rows, setRows] = useState([])
   const [chartData, setChartData] = useState({});
 
-  const {goToPreviousStage, goToNextStage,ratingsList,mobile, apiLoading} = useDaikonContext();
+  const {goToPreviousStage, goToNextStage,ratingsList,mobile, apiLoading, userRank} = useDaikonContext();
 
   function createData(Index, Score) {
     return {Index, Score};
@@ -49,6 +49,13 @@ function ShowRatings() {
       )}
   },[rows])
 
+  useEffect(()=>{
+    const inputs = document.querySelectorAll('#ranking-text');
+    Array.from(inputs).map(input =>{
+        input.classList.add('fadeIn-upQuick');
+    })
+},[])
+
 
 
   return (
@@ -59,6 +66,9 @@ function ShowRatings() {
             </Typography>
             <Typography variant = 'h5'  sx = {{marginBottom : '3%'}}>
                1 is more creative 0 is less.
+            </Typography>
+            <Typography variant = 'h5'  sx = {{margin : '1%'}}>
+               You are the <b id = 'ranking-text'>{userRank}th</b> most creative user.
             </Typography>
         </center>
         <center>

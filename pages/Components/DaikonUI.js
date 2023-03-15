@@ -8,6 +8,7 @@ import IdeasInput2 from './StageComponents/IdeasInputs2';
 import QueryInput from './StageComponents/QueryInput';
 import ShowPrompts from './StageComponents/ShowPrompts';
 import ShowRatings from './StageComponents/ShowRatings';
+import Intro from './StageComponents/Intro';
 
 function DaikonUI() {
 
@@ -17,16 +18,18 @@ function DaikonUI() {
     const stageComponent = () =>{
         switch(stage){
             case UIStages[0]:
-                return(<QueryInput />)
+                return(<Intro />)
             case UIStages[1]:
-                return(<IdeasInput1 />)
+                return(<QueryInput />)
             case UIStages[2]:
-                return(<ShowPrompts />)
+                return(<IdeasInput1 />)
             case UIStages[3]:
-                return(<IdeasInput2/>)
+                return(<ShowPrompts />)
             case UIStages[4]:
-                return(<ShowRatings/>)
+                return(<IdeasInput2/>)
             case UIStages[5]:
+                return(<ShowRatings/>)
+            case UIStages[6]:
                 return(<FinishPage />)    
         }
     }
@@ -48,7 +51,7 @@ function DaikonUI() {
                     );
                     })}
                 </Stepper>
-                <Typography variant = 'h6' sx = {{margin: '2% 0 2% 0'}}><b>{query}</b></Typography>
+                {currentStep > 0 ? <Typography variant = 'h6' sx = {{margin: '2% 0 2% 0'}}><b>{query}</b></Typography>: <></>} 
             </center>
             <Box className='daikonQuery_container'>
                 {
