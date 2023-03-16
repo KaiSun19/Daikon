@@ -50,7 +50,7 @@ export const DaikonProvider = ({children}) =>{
     // global states
 
     const [query, setQuery] = useState("I want to make a...");
-    const [stage,setStage] = useState(UIStages[2])
+    const [stage,setStage] = useState(UIStages[0])
     const [firstIdeas,setFirstIdeas] = useState([])
     const [secondIdeas,setSecondIdeas] = useState([])
     const [ideaRatings, setIdeaRatings] = useState([5,5,5,5,5]);
