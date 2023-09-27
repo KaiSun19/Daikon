@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -99,54 +103,61 @@ a {
   }
 }
 
-.supersizeText{
+.supersizeText {
   font-size: 90px;
   font-weight: 500;
   /* animation: fadeIn-up 3s ease-in-out;  */
 }
 
-#supersizeText-cite{
+#supersizeText-cite {
   opacity: 0;
   /* animation: fadeIn 2s ease-in-out forwards; 
   animation-delay: 1s; */
 }
 
-.fadeIn-up{
-  animation: fadeIn-up 3s ease-in-out ; 
+.fadeIn-up {
+  animation: fadeIn-up 3s ease-in-out;
 }
 
-.fadeIn-upQuick{
-  animation: fadeIn-up 1s ease-in-out ; 
+.fadeIn-upQuick {
+  animation: fadeIn-up 1s ease-in-out;
 }
 
-.fadeIn-upQuick{
-  animation: fadeIn-up 1s ease-in-out ; 
+.fadeIn-upQuick {
+  animation: fadeIn-up 1s ease-in-out;
 }
 
-.fadeIn{
-  animation: fadeIn 2s ease-in-out forwards; 
+.fadeIn {
+  animation: fadeIn 2s ease-in-out forwards;
   animation-delay: 1s;
 }
 
-@keyframes fadeIn-up{ 
-  0%    { opacity: 0; transform: translateY(100px); }
-  100%  { opacity: 1;transform: translateY(0px) }
+@keyframes fadeIn-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
-@keyframes fadeIn{ 
-  0%    { opacity: 0; }
-  100%  { opacity: 1;}
-} 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-@media (max-width: 395px){
-  .supersizeText{
+@media (max-width: 395px) {
+  .supersizeText {
     font-size: 50px;
   }
 
   #supersizeText-cite > i {
     font-size: 32px;
   }
-
 }
-
-
